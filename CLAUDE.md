@@ -1,7 +1,7 @@
-# NIMBUS (distribuible) — reglas para Claude
+# Hub (distribuible) — reglas para Claude
 
 ## Qué es
-Versión genérica e instalable del flujo NIMBUS para Claude Code. Sin datos personales. Pensado para que cualquiera lo clone, lo instale (`bash install.sh`) y lo use en su propio entorno.
+Versión genérica e instalable del flujo Hub para Claude Code. Sin datos personales. Pensado para que cualquiera lo clone, lo instale (`bash install.sh`) y lo use en su propio entorno.
 
 ## Reglas técnicas duras
 - **Bash puro** en los scripts (`install.sh`, `uninstall.sh`, `nimbus-doctor.sh`). Sin Python ni Node como dependencia (`jq` es opcional).

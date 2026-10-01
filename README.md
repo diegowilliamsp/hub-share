@@ -1,8 +1,8 @@
-# NIMBUS
+# Hub
 
 Un flujo de trabajo para **Claude Code** que lo hace trabajar mejor en tus proyectos: lo guía para preguntar antes de asumir, ir por pasos pequeños y verificables, y nunca saltarse el proceso cuando importa.
 
-NIMBUS no es un programa que corres: es un conjunto de instrucciones que Claude Code lee, organizadas para cargar **solo lo que cada tarea necesita** (no un manual gigante), y con un **candado** que de ley te declara qué va a hacer y qué tan a fondo, antes de empezar.
+Hub no es un programa que corres: es un conjunto de instrucciones que Claude Code lee, organizadas para cargar **solo lo que cada tarea necesita** (no un manual gigante), y con un **candado** que de ley te declara qué va a hacer y qué tan a fondo, antes de empezar.
 
 ## Cómo funciona (en corto)
 
@@ -15,22 +15,22 @@ NIMBUS no es un programa que corres: es un conjunto de instrucciones que Claude 
 Requisitos: macOS o Linux, [Claude Code](https://claude.com/claude-code), y `bash`. (`jq` es opcional; si lo tienes, el registro del hook es automático.)
 
 ```bash
-git clone <este-repo> nimbus
-cd nimbus
+git clone <este-repo> hub
+cd hub
 bash install.sh
 ```
 
-El instalador es **idempotente** (lo puedes correr varias veces) y **no destructivo** (hace backup de `~/.claude/` antes de tocar nada y nunca pisa tu `CLAUDE.md`). Te preguntará tu nombre para que NIMBUS te hable por él.
+El instalador es **idempotente** (lo puedes correr varias veces) y **no destructivo** (hace backup de `~/.claude/` antes de tocar nada y nunca pisa tu `CLAUDE.md`). Te preguntará tu nombre para que Hub te hable por él.
 
 ## Personalizar (onboarding)
 
 Después de instalar, abre Claude Code y di:
 
 ```
-configura NIMBUS
+configura Hub
 ```
 
-(o usa la skill `/nimbus-setup`). Claude correrá un grill corto — una pregunta a la vez — para personalizar NIMBUS a tu gusto y tu entorno (nombre, voz o texto, tus proyectos, idioma). Lo que respondas se guarda en tu capa **persona** (`~/.claude/persona/`), que es **tuya y privada**.
+(o usa la skill `/nimbus-setup`). Claude correrá un grill corto — una pregunta a la vez — para personalizar Hub a tu gusto y tu entorno (nombre, voz o texto, tus proyectos, idioma). Lo que respondas se guarda en tu capa **persona** (`~/.claude/persona/`), que es **tuya y privada**.
 
 ## Quitar
 
@@ -50,4 +50,4 @@ Verifica que todo quedó bien instalado (flujo, escalones, hook, bloque del CLAU
 
 ## Privacidad
 
-Este repo es **genérico**: no contiene datos de nadie. Tu información (tus ideas, tus criterios, tus proyectos) vive solo en tu `~/.claude/persona/` local y **nunca** se sube a ningún lado por NIMBUS.
+Este repo es **genérico**: no contiene datos de nadie. Tu información (tus ideas, tus criterios, tus proyectos) vive solo en tu `~/.claude/persona/` local y **nunca** se sube a ningún lado por Hub.

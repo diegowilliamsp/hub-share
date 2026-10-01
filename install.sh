@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# NIMBUS — instalador portable, idempotente y no-destructivo.
-# Instala el flujo de trabajo NIMBUS (carga por escalones + candado por hook) en ~/.claude/.
+# Hub — instalador portable, idempotente y no-destructivo.
+# Instala el flujo de trabajo Hub (carga por escalones + candado por hook) en ~/.claude/.
 # Funciona en cualquier máquina/usuario: detecta paths dinámicamente, no hardcodea nada.
 # Reglas: bash puro, backup antes de tocar ~/.claude/, nunca pisa tu CLAUDE.md global.
 set -euo pipefail
@@ -17,7 +17,7 @@ CLAUDE_DIR="${CLAUDE_DIR:-$HOME/.claude}"   # override para sandbox de tests: CL
 MODE="copy"
 [ "${1:-}" = "--dev" ] || [ "${1:-}" = "--symlink" ] && MODE="symlink"
 
-say "Instalando NIMBUS"
+say "Instalando Hub"
 say "  repo:   $REPO_DIR"
 say "  destino: $CLAUDE_DIR  (modo: $MODE)"
 mkdir -p "$CLAUDE_DIR"
@@ -32,7 +32,7 @@ fi
 # --- 3. Identidad: una sola pregunta para el token de nombre (el grill completo lo corre Claude) ---
 USER_NAME="${NIMBUS_USER_NAME:-}"
 if [ -z "$USER_NAME" ] && [ -t 0 ]; then
-  printf '¿Cómo te llamas (para que NIMBUS te hable por tu nombre)? [el Director]: '
+  printf '¿Cómo te llamas (para que Hub te hable por tu nombre)? [el Director]: '
   read -r USER_NAME || true
 fi
 USER_NAME="${USER_NAME:-el Director}"
@@ -81,13 +81,13 @@ ok "Capa persona en $PERSONA_DIR"
 
 # --- 6. Piso: anexar el bloque claude-flow-proyectos al CLAUDE.md global (NUNCA pisar) ---
 GLOBAL="$CLAUDE_DIR/CLAUDE.md"
-say "Anexando el bloque NIMBUS al CLAUDE.md global..."
+say "Anexando el bloque Hub al CLAUDE.md global..."
 touch "$GLOBAL"
 if grep -q 'BEGIN claude-flow-proyectos' "$GLOBAL" 2>/dev/null; then
   warn "El bloque claude-flow-proyectos ya está en tu CLAUDE.md global, no se duplica"
 else
   { echo ""; place "$REPO_DIR/flow/CLAUDE.md.snippet" /dev/stdout; } >> "$GLOBAL"
-  ok "Bloque NIMBUS anexado (no se tocó el resto de tu CLAUDE.md)"
+  ok "Bloque Hub anexado (no se tocó el resto de tu CLAUDE.md)"
 fi
 
 # --- 7. Hook del candado (versionado en flow/hooks/, portable, con $HOME) ---
@@ -117,7 +117,7 @@ elif command -v jq >/dev/null 2>&1; then
 else
   warn "jq no está instalado — registra el hook a mano en $SETTINGS:"
   printf '%s\n' '  "hooks": { "UserPromptSubmit": [ { "hooks": [ { "type": "command", "command": "bash \"$HOME/.claude/hooks/nimbus-router.sh\"" } ] } ] }'
-  printf '%s\n' '  (o pídele a Claude Code: "registra el hook de NIMBUS en mi settings.json")'
+  printf '%s\n' '  (o pídele a Claude Code: "registra el hook de Hub en mi settings.json")'
 fi
 
 # --- 9. Marcador de onboarding (idempotente: solo si no se completó antes) ---
@@ -129,6 +129,6 @@ fi
 echo ""
 if [ -x "$REPO_DIR/nimbus-doctor.sh" ]; then CLAUDE_DIR="$CLAUDE_DIR" bash "$REPO_DIR/nimbus-doctor.sh" || true; fi
 echo ""
-ok "NIMBUS instalado."
-echo "   Abre Claude Code y di 'configura NIMBUS' para personalizarlo a tu gusto (grill de onboarding)."
+ok "Hub instalado."
+echo "   Abre Claude Code y di 'configura Hub' para personalizarlo a tu gusto (grill de onboarding)."
 echo "   Para quitarlo: bash \"$REPO_DIR/uninstall.sh\""

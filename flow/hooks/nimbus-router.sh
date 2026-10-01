@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Hook UserPromptSubmit de NIMBUS v3.7 — entrega los medidores calculados + el bloque
+# Hook UserPromptSubmit de Hub v3.7 — entrega los medidores calculados + el bloque
 # inyectable del router (marcadores NIMBUS:INYECTAR en ~/.claude/ROUTER.md).
 #
 # ORDEN DE LA SALIDA (regla de diseño, no estética): lo CALCULADO primero, la prosa nunca.
@@ -210,14 +210,14 @@ prematch=""
       p() { printf '%s' "$ptext" | grep -qiE "$1" 2>/dev/null && add "$2"; }
       p 'proyecto nuevo|empecemos|voy a empezar|abramos|hagamos un proyecto'  'proyecto-nuevo'
       p 'sigamos con|continuemos con|retomemos|seguimos con'                  'proyecto-continuar'
-      p 'adopta|adoptarlo|registra este proyecto|usa nimbus'                  'adoptar-proyecto'
+      p 'adopta|adoptarlo|registra este proyecto|usa nimbus|usa hub'          'adoptar-proyecto'
       p 'archiva|borra el proyecto|elimina el proyecto|t[íi]ralo'             'proyecto-borrar-archivar'
       p 'trabado|atorado|bug duro|regresi[óo]n de performance'                'claude-trabado'
       p 'eval[úu]a|qu[ée] uso para|build vs reuse|comp[áa]rame'               'evaluacion-herramientas'
       p 'instala|integra|clona este repo|agregu?emos dep|agrega dep'          'seguridad-externos'
       p 'vale la pena empezar|riesgo de plataforma|saqu[ee]n? esto nativo'    'filtro-plataforma'
       p 'guarda esta idea|anota esta idea|anota esto en ideas|descarta la idea' 'ideas-crudas'
-      p 'configura nimbus|personaliza nimbus|onboarding|setup nimbus|nimbus-setup' 'nimbus-onboarding'
+      p 'configura (hub|nimbus)|personaliza (hub|nimbus)|onboarding|setup (hub|nimbus)|nimbus-setup' 'nimbus-onboarding'
       p 'nos vemos|ah[íi] la dejamos|ya cerramos|c[óo]rtale|cerramos sesi[óo]n' 'cierre-sesion'
       p 'pre-commit|reset --hard|force push|git destructivo'                  'mecanica-git'
       [ -n "$hits" ] && prematch="🧩 posible escalón:${hits}  ← sugerencia por palabra; confirma o corrige"
@@ -226,7 +226,7 @@ prematch=""
 } 2>/dev/null
 
 # --- 3. SALIDA: lo calculado PRIMERO (sobrevive cualquier corte del harness) ---
-echo "━━ NIMBUS · medido por el hook — copiar TAL CUAL en el ESTATUS ━━"
+echo "━━ Hub · medido por el hook — copiar TAL CUAL en el ESTATUS ━━"
 [ -n "$savestate" ] && echo "💾 GUARDADO   ${savestate}"
 echo "📊 CONTEXTO   ${gauge}"
 [ -n "$cfgline" ]   && echo "${cfgline}"
@@ -237,20 +237,20 @@ echo ""
 # --- 4. Bloque inyectable del router (una sola fuente de verdad: ~/.claude/ROUTER.md) ---
 R="$HOME/.claude/ROUTER.md"
 if [ ! -f "$R" ]; then
-  echo "AVISO NIMBUS: ~/.claude/ROUTER.md no encontrado — router no cargado. Revisar symlink / install.sh."
+  echo "AVISO Hub: ~/.claude/ROUTER.md no encontrado — router no cargado. Revisar symlink / install.sh."
 else
   blk=$(awk '/NIMBUS:INYECTAR:INICIO/{f=1;next} /NIMBUS:INYECTAR:FIN/{f=0} f' "$R" 2>/dev/null)
   if [ -n "$blk" ]; then
     printf '%s\n' "$blk"
   else
     # Marcadores ausentes o rotos: NO quedarse callado — entregar el router entero.
-    echo "AVISO NIMBUS: no encontré los marcadores NIMBUS:INYECTAR en ROUTER.md — entrego el router completo (puede truncarse)."
+    echo "AVISO Hub: no encontré los marcadores NIMBUS:INYECTAR en ROUTER.md — entrego el router completo (puede truncarse)."
     cat "$R"
   fi
 fi
 
 # --- 5. Recordatorio de la ley (corto: la plantilla canónica ya va arriba) ---
 echo ""
-echo "LEY NIMBUS: cierra CADA respuesta con el bloque ESTATUS de arriba, SIEMPRE al final."
+echo "LEY Hub: cierra CADA respuesta con el bloque ESTATUS de arriba, SIEMPRE al final."
 echo "Nunca lo omitas: trivial o ack => variante 'escalón 0' (💾 + 🧩 + 📊)."
 echo "Carga SOLO el/los escalón(es) que apliquen, de ~/.claude/escalones/."

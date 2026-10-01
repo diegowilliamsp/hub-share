@@ -1,10 +1,10 @@
-# Flujo de trabajo en proyectos — NIMBUS v3
+# Flujo de trabajo en proyectos — Hub v3
 
 Este documento define cómo empezar o continuar un proyecto de software con Claude Code. Aplica a trabajo no-trivial sobre proyectos, no a fixes chiquitos ni a preguntas sueltas.
 
-## Cómo funciona NIMBUS v3 (carga por escalones)
+## Cómo funciona Hub v3 (carga por escalones)
 
-NIMBUS ya no es un solo documento que se carga entero. Son tres piezas:
+Hub ya no es un solo documento que se carga entero. Son tres piezas:
 
 - **Piso:** lo que se carga SIEMPRE en cada sesión — el `CLAUDE.md` global (principios rectores, roles del meta-sistema, reglas de comunicación, + el bloque `claude-flow-proyectos` con el resumen de triggers y el candado) MÁS el `CLAUDE.md` del proyecto activo. **Este overview NO es piso** — se lee bajo demanda, no en cada sesión (piso delgado).
 - **Escalones:** cada sub-protocolo es un archivo autónomo en `flow/escalones/<nombre>.md`. Solo se carga el que la tarea pide, no todo el flujo.
@@ -21,7 +21,7 @@ Este archivo es el **overview**: el preámbulo de referencia (universal) + el í
 
 ## Cuándo NO aplica
 
-Lista canónica en `flow/ROUTER.md` §"Cuándo NO aplica NIMBUS (escalón 0)": bugs chiquitos, ajustes de una línea, dudas, exploración rápida, preguntas sobre cómo funciona algo, y los overrides ("skip grill", "directo al código", "solo arregla X", "modo rápido"). En esos casos la declaración del candado es "escalón 0 — nada que cargar".
+Lista canónica en `flow/ROUTER.md` §"Cuándo NO aplica Hub (escalón 0)": bugs chiquitos, ajustes de una línea, dudas, exploración rápida, preguntas sobre cómo funciona algo, y los overrides ("skip grill", "directo al código", "solo arregla X", "modo rápido"). En esos casos la declaración del candado es "escalón 0 — nada que cargar".
 
 ## Principio rector
 
@@ -41,7 +41,7 @@ Lo que SÍ se hace:
 
 ## Principio de paridad voz ↔ texto
 
-NIMBUS se puede invocar de dos formas:
+Hub se puede invocar de dos formas:
 
 1. **Directo a Claude Code** (texto en terminal o IDE).
 2. **Vía una capa de voz** (un asistente de voz que escucha, decide que la tarea requiere Claude Code, y lo invoca como herramienta).
@@ -123,7 +123,7 @@ Cada escalón es un archivo autónomo en `flow/escalones/`. Aquí está el mapa 
 | [`ideas-crudas`](./escalones/ideas-crudas.md) | capturar / descartar ideas crudas |
 | [`proyecto-nuevo`](./escalones/proyecto-nuevo.md) | arrancar un proyecto desde cero |
 | [`proyecto-continuar`](./escalones/proyecto-continuar.md) | retomar un proyecto existente |
-| [`adoptar-proyecto`](./escalones/adoptar-proyecto.md) | registrar un proyecto existente en NIMBUS |
+| [`adoptar-proyecto`](./escalones/adoptar-proyecto.md) | registrar un proyecto existente en Hub |
 | [`proyecto-borrar-archivar`](./escalones/proyecto-borrar-archivar.md) | archivar o borrar un proyecto |
 | [`rebanada-ready`](./escalones/rebanada-ready.md) | Definition of Ready + recomendación de effort |
 | [`rebanada-done`](./escalones/rebanada-done.md) | Definition of Done |

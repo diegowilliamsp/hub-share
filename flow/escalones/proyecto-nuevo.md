@@ -1,6 +1,6 @@
 # Escalón: proyecto-nuevo — arrancar desde cero
 
-> **Escalón del flujo NIMBUS (v3 — carga por escalones).** Se carga solo cuando dispara su trigger; asume el **piso** cargado (principios rectores, roles del meta-sistema y reglas de comunicación del `CLAUDE.md` global). No requiere el resto del flujo.
+> **Escalón del flujo Hub (v3 — carga por escalones).** Se carga solo cuando dispara su trigger; asume el **piso** cargado (principios rectores, roles del meta-sistema y reglas de comunicación del `CLAUDE.md` global). No requiere el resto del flujo.
 
 ## Cuándo carga este escalón (triggers)
 

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# NIMBUS — desinstalador simétrico. Quita TODO lo que install.sh puso, sin dejar un hook roto.
+# Hub — desinstalador simétrico. Quita TODO lo que install.sh puso, sin dejar un hook roto.
 # NO borra tu capa persona (tus ideas/retros/criterios) — eso es tuyo.
 set -euo pipefail
 CLAUDE_DIR="${CLAUDE_DIR:-$HOME/.claude}"
 B=$'\033[34m'; G=$'\033[32m'; Y=$'\033[33m'; N=$'\033[0m'
 
-echo "Esto quitará NIMBUS de $CLAUDE_DIR (flujo, router, escalones, hook, bloque del CLAUDE.md)."
+echo "Esto quitará Hub de $CLAUDE_DIR (flujo, router, escalones, hook, bloque del CLAUDE.md)."
 echo "Tu capa persona ($CLAUDE_DIR/persona) NO se borra."
 printf 'Para confirmar, escribe la palabra DESINSTALAR: '
 read -r ans || true
@@ -25,7 +25,7 @@ GLOBAL="$CLAUDE_DIR/CLAUDE.md"
 if [ -f "$GLOBAL" ] && grep -q 'BEGIN claude-flow-proyectos' "$GLOBAL"; then
   TMP="$(mktemp)"
   awk 'BEGIN{s=0} /# --- BEGIN claude-flow-proyectos/{s=1} /# --- END claude-flow-proyectos/{s=0;next} s==0{print}' "$GLOBAL" > "$TMP" && mv "$TMP" "$GLOBAL"
-  printf '%s✓%s Bloque NIMBUS quitado de tu CLAUDE.md global (lo demás intacto)\n' "$G" "$N"
+  printf '%s✓%s Bloque Hub quitado de tu CLAUDE.md global (lo demás intacto)\n' "$G" "$N"
 fi
 
 # Quitar la entrada del hook de settings.json (jq si está; si no, avisar)
@@ -44,4 +44,4 @@ if [ -f "$SETTINGS" ] && grep -q 'nimbus-router.sh' "$SETTINGS"; then
   fi
 fi
 echo ""
-printf '%s✓%s NIMBUS desinstalado. Tu capa persona sigue en %s/persona\n' "$G" "$N" "$CLAUDE_DIR"
+printf '%s✓%s Hub desinstalado. Tu capa persona sigue en %s/persona\n' "$G" "$N" "$CLAUDE_DIR"

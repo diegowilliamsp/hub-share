@@ -1,6 +1,6 @@
 # Escalón: rebanada-ready — Definition of Ready + effort
 
-> **Escalón del flujo NIMBUS (v3 — carga por escalones).** Se carga solo cuando dispara su trigger; asume el **piso** cargado (principios rectores, roles del meta-sistema y reglas de comunicación del `CLAUDE.md` global). No requiere el resto del flujo.
+> **Escalón del flujo Hub (v3 — carga por escalones).** Se carga solo cuando dispara su trigger; asume el **piso** cargado (principios rectores, roles del meta-sistema y reglas de comunicación del `CLAUDE.md` global). No requiere el resto del flujo.
 
 ## Cuándo carga este escalón (triggers)
 
@@ -57,7 +57,7 @@ Medidor = **tacómetro de color** (semáforo de zona + barra proporcional): `hig
 
 ## Recomendación de roles del pipeline al arrancar la rebanada
 
-Junto con el effort —y como la misma decisión, "cómo atacamos esta tajada"— el Constructor recomienda qué **roles del pipeline de mando** de NIMBUS conviene activar para la rebanada. Los roles:
+Junto con el effort —y como la misma decisión, "cómo atacamos esta tajada"— el Constructor recomienda qué **roles del pipeline de mando** de Hub conviene activar para la rebanada. Los roles:
 
 - **🧭 Director** — tú. Apruebas, decides, das la luz verde.
 - **🔄 Transformador** — convierte tu idea cruda en un enunciado claro y estructurado (no inventa lo que falta; pregunta).

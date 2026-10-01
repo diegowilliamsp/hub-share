@@ -2,6 +2,16 @@
 
 Formato: [Keep a Changelog](https://keepachangelog.com/es-ES/1.1.0/) · Versionado: [SemVer](https://semver.org/lang/es/).
 
+## [1.6.0] — 2026-10-01
+
+### NIMBUS ahora se llama Hub
+
+El método cambia de nombre: lo que se lee (instalador, doctor, desinstalador, README, router, escalones, overview, bloque del `CLAUDE.md`, skill de onboarding y mensajes del hook) dice **Hub**. El repo ya se llama `hub-share`.
+
+- **Sin romper instalaciones:** los nombres técnicos se quedan (`nimbus-router.sh`, `nimbus-doctor.sh`, la skill `/nimbus-setup`, el escalón `nimbus-onboarding`, los marcadores `NIMBUS:INYECTAR`, `~/.claude/.nimbus-*` y `NIMBUS_USER_NAME`). Quien ya lo tiene instalado sigue funcionando; al reinstalar recibe los textos nuevos.
+- El pre-match del hook reconoce «configura Hub» y «usa Hub» además de los de antes.
+- Bump MINOR 1.5.1 → 1.6.0.
+
 ## [1.5.1] — 2026-08-06
 
 ### La recomendación de modelo ahora cita su regla

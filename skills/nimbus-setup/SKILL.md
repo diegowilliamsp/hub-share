@@ -1,9 +1,9 @@
 ---
 name: nimbus-setup
-description: Personaliza NIMBUS a tu gusto y entorno (nombre, voz/texto, idioma, proyectos, criterios). Corre el grill de onboarding del primer arranque. Úsala al instalar NIMBUS o cuando quieras reconfigurarlo.
+description: Personaliza Hub a tu gusto y entorno (nombre, voz/texto, idioma, proyectos, criterios). Corre el grill de onboarding del primer arranque. Úsala al instalar Hub o cuando quieras reconfigurarlo.
 ---
 
-# /nimbus-setup — personalizar NIMBUS
+# /nimbus-setup — personalizar Hub
 
 Carga y ejecuta el escalón de onboarding: lee `~/.claude/escalones/nimbus-onboarding.md` y sigue su grill paso a paso.
 

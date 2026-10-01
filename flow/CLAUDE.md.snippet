@@ -2,13 +2,13 @@
 # Bloque agregado por install.sh de claude-flow-proyectos.
 # Para desactivar el flujo: borra este bloque o desinstala con uninstall.sh.
 
-## Flujo de trabajo en proyectos — NIMBUS v3 (carga por escalones)
+## Flujo de trabajo en proyectos — Hub v3 (carga por escalones)
 
-NIMBUS ya NO se carga entero. Cada sub-protocolo es un **escalón** autónomo en `~/.claude/escalones/<nombre>.md`; el **router** (`~/.claude/ROUTER.md`) mapea la tarea a su(s) escalón(es). Overview en `~/.claude/FLUJO_PROYECTOS.md`. Diseño: NIMBUS v3 — carga dinámica por escalones.
+Hub ya NO se carga entero. Cada sub-protocolo es un **escalón** autónomo en `~/.claude/escalones/<nombre>.md`; el **router** (`~/.claude/ROUTER.md`) mapea la tarea a su(s) escalón(es). Overview en `~/.claude/FLUJO_PROYECTOS.md`. Diseño: Hub v3 — carga dinámica por escalones.
 
 Cuando {{USER_NAME}} dispare un trigger de trabajo de proyecto (familias abajo): **NO leer el flujo entero.** En su lugar:
 1. Match contra el router. **El hook inyecta cada turno** el bloque marcado de `~/.claude/ROUTER.md` (plantilla del ESTATUS + escaleras de modelo/effort + tabla trigger→escalón), más los medidores que calcula. Se lee de ahí, NO de memoria; si por lo que sea no llegó, consultar el archivo antes de adivinar.
-2. **Candado (de ley, siempre):** declarar el candado en el **bloque ESTATUS enmarcado al final** de la respuesta (nunca arriba; **nunca omite áreas** — veredicto + **💾 guardado** + **🤖 modelo** recomendado con `/model` + **🎚️ effort** `<tier>` con medidor y comando `/effort` (más sub-línea **🎭 roles** del pipeline siempre debajo — `👷 directo` por default) + **🧩 escalón(es)** + **📊 contexto/sesión** con su comando `/compact`·`/clear` según banda; el **hook** calcula 💾 y el medidor, y reporta el modelo/effort que **de verdad corrieron** el turno pasado para que la recomendación se haga contra el estado real y no a ciegas; plantilla canónica en `~/.claude/ROUTER.md` §Candado, inyectada cada turno) y esperar aprobación/ajuste del Director. El ESTATUS sale en **cada turno sin excepción**: completo si hay trabajo de proyecto, variante de escalón 0 (señal mínima) si no — así siempre se ve si NIMBUS se está usando.
+2. **Candado (de ley, siempre):** declarar el candado en el **bloque ESTATUS enmarcado al final** de la respuesta (nunca arriba; **nunca omite áreas** — veredicto + **💾 guardado** + **🤖 modelo** recomendado con `/model` + **🎚️ effort** `<tier>` con medidor y comando `/effort` (más sub-línea **🎭 roles** del pipeline siempre debajo — `👷 directo` por default) + **🧩 escalón(es)** + **📊 contexto/sesión** con su comando `/compact`·`/clear` según banda; el **hook** calcula 💾 y el medidor, y reporta el modelo/effort que **de verdad corrieron** el turno pasado para que la recomendación se haga contra el estado real y no a ciegas; plantilla canónica en `~/.claude/ROUTER.md` §Candado, inyectada cada turno) y esperar aprobación/ajuste del Director. El ESTATUS sale en **cada turno sin excepción**: completo si hay trabajo de proyecto, variante de escalón 0 (señal mínima) si no — así siempre se ve si Hub se está usando.
 3. Cargar SOLO ese(esos) escalón(es) de `~/.claude/escalones/`. Triviales/acks → "escalón 0 — nada que cargar".
 
 **Familias de triggers** (la tabla completa vive en el router):

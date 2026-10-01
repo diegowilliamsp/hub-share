@@ -1,6 +1,6 @@
-# Router de NIMBUS — tabla trigger → escalón
+# Router de Hub — tabla trigger → escalón
 
-> **Pieza del piso (NIMBUS v3 — carga dinámica por escalones).** Este router lo entrega un **hook** en cada turno (no se hornea en el `CLAUDE.md`). Es la tabla que decide qué escalón cargar sin leer el flujo entero.
+> **Pieza del piso (Hub v3 — carga dinámica por escalones).** Este router lo entrega un **hook** en cada turno (no se hornea en el `CLAUDE.md`). Es la tabla que decide qué escalón cargar sin leer el flujo entero.
 >
 > **Estructura (v1.5.0):** el hook inyecta **solo** lo que va entre los marcadores `NIMBUS:INYECTAR`. Todo lo de abajo del marcador de cierre es el porqué del diseño: se lee bajo demanda, no cada turno. Si agregas algo dentro del bloque, paga renta en **cada turno de cada sesión** — ver §"Por qué el bloque va primero y es chico".
 
@@ -9,7 +9,7 @@
 ## Candado — ESTATUS, plantilla canónica (de ley: cierra CADA respuesta, AL FINAL, nunca arriba)
 
 ```
-┌─ 🧭 NIMBUS · ESTATUS ───────────────────────────────
+┌─ 🧭 Hub · ESTATUS ───────────────────────────────
 │ ✅ se hizo  · <lo cerrado>          · al retomar: 📍 aquí vamos
 │ ▶️ sigue    · <siguiente del roadmap>  · fuera de roadmap: ⏳ dime qué sigue
 │ ╶────────────────────────────────────────────────
@@ -23,7 +23,7 @@
 └─ ¿de acuerdo? ──────────────────────────────────────
 ```
 
-**Nunca omite áreas.** Única excepción: **escalón 0** (NIMBUS inactivo este turno) = solo `💾` + `🧩 0 — nada que cargar` + `📊`.
+**Nunca omite áreas.** Única excepción: **escalón 0** (Hub inactivo este turno) = solo `💾` + `🧩 0 — nada que cargar` + `📊`.
 `💾` y `📊` se copian **TAL CUAL** del hook. `🤖`, `🎚️`, `🎭`, `🧩` los pinta el Constructor por juicio.
 **`🤖` cita el escalón de la escalera del que sale** (`escalón 4 — cruza varios módulos`). Si ninguno aplica, escribir `sin escalón — juicio` y la razón: inventar un escalón para justificar una corazonada previa es el fallo que esto existe para atrapar.
 🎭 Roles: 🔄 Transformador · 🧠 Analista · 👷 Constructor · 🔍 Auditor (el Director eres tú, 🧭). Default `👷 directo`. `👷→🔍` cierre con código nuevo · `🧠→👷→🔍` decisión arquitectónica o dep nueva · `🔄→🧠→👷→🔍` idea cruda ambigua.
@@ -59,7 +59,7 @@
 |---|---|
 | "empecemos proyecto nuevo", "voy a empezar X", "abramos X" | `proyecto-nuevo` |
 | "sigamos con X", "continuemos con X", "retomemos X" | `proyecto-continuar` |
-| "adopta/registra este proyecto en NIMBUS", "usa NIMBUS aquí" | `adoptar-proyecto` |
+| "adopta/registra este proyecto en Hub", "usa Hub aquí" | `adoptar-proyecto` |
 | "archiva X", "pausa X" / "borra X", "elimina X", "tíralo" | `proyecto-borrar-archivar` |
 | Muro, dependencia rota, bug duro, regresión de performance | `claude-trabado` |
 | "evalúa X", "qué uso para X", "compara X vs Y", "build vs reuse" | `evaluacion-herramientas` |
@@ -68,13 +68,13 @@
 | "guarda esta idea", "anota esto", "descarta la idea de X" | `ideas-crudas` |
 | "nos vemos", "ahí la dejamos", "ya cerramos", "pausa", "córtale" | `cierre-sesion` |
 | Setup de pre-commit/branches, o ANTES de un git destructivo | `mecanica-git` |
-| "configura/personaliza NIMBUS", "onboarding", `/nimbus-setup` | `nimbus-onboarding` |
+| "configura/personaliza Hub", "onboarding", `/nimbus-setup` | `nimbus-onboarding` |
 
 **Encadenados** (sin disparador propio, los declaran `proyecto-nuevo`/`proyecto-continuar`): `rebanada-ready` antes de codear · `rebanada-done` al cerrar.
 **Sin match pero ES trabajo de proyecto** (refactor, tests, limpieza) → carga `rebanada-ready`, NO lo trates como escalón 0. Si no hay sesión de proyecto activa, encadena antes `proyecto-continuar`.
 **Escalón 0** (no carga nada, pero el ESTATUS igual sale): bug chico, duda suelta, pregunta de cómo funciona algo, o "modo rápido"/"directo al código"/"skip grill" → respetar sin re-proponer el flujo.
 
-## Estaciones (el 100% de NIMBUS = 14 escalones)
+## Estaciones (el 100% de Hub = 14 escalones)
 
 `arranque(4)` nuevo · continuar · adoptar · borrar — `rebanada(4)` ready · done · trabado · git — `decisión(3)` eval · seguridad · plataforma — `cierre(2)` ideas · cierre — `setup(1)` onboarding
 
@@ -109,7 +109,7 @@ De ahí las dos reglas de diseño de la salida del hook, en este orden:
 
 **Nunca omite áreas.** La sub-línea `🎭 ROLES` sale en cada turno de proyecto aunque la cadena sea `👷 directo` — así su **ausencia señala un fallo** (la feature no corrió) y no se confunde con "fue directo a propósito". Mismo principio para las demás áreas.
 
-**Escalón 0 se queda mínimo** (`💾` + `🧩` + `📊`): es la señal de "NIMBUS inactivo este turno"; forzar las áreas completas sin trabajo de proyecto sería ruido. Es la única excepción a "nunca omite áreas".
+**Escalón 0 se queda mínimo** (`💾` + `🧩` + `📊`): es la señal de "Hub inactivo este turno"; forzar las áreas completas sin trabajo de proyecto sería ruido. Es la única excepción a "nunca omite áreas".
 
 **Al retomar**, la primera línea es `📍 aquí vamos` en vez de `✅ se hizo`; la línea `▶️ sigue` queda igual y nunca se omite. Si lo hecho quedó fuera del roadmap, va `⏳ dime qué sigue` — no se puede recomendar siguiente.
 
