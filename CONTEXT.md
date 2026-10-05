@@ -1,3 +1,13 @@
+---
+tipo: proyecto
+area: share
+cuando: "el kit público para amigos"
+relacionados:
+  - README.md
+vive-en: git
+actualizado: 2026-10-05 por ARETE (Claude Code) · CEREBRO, frontmatter del ADR 017
+---
+
 # Hub (distribuible) — contexto
 
 ## Qué es
